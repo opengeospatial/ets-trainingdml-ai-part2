@@ -61,11 +61,15 @@ public class AITrainingDataTest extends CommonFixture {
 
             JsonSchema schema = tester.getSchema(schemaToApply);
             JsonNode rootNode = tester.getNodeFromFile(testSubject);
+            List<JsonNode> targetNode = JsonUtils.findNodesByType(rootNode, targetType);
 
-            if (rootNode.has("type") && rootNode.get("type").asText().equals(targetType)) {
-                schema.validate(rootNode);
-            } else {
-                sb.append("Item " + rootNode + " is not an " + targetType + ".\n");
+            try {
+                for (JsonNode node : targetNode) {
+                    schema.validate(node);
+                }
+            } catch (Exception e) {
+                sb.append(e.getMessage());
+                e.printStackTrace();
             }
         } catch (Exception e) {
             sb.append(e.getMessage());
@@ -116,6 +120,36 @@ public class AITrainingDataTest extends CommonFixture {
 
     @Test(description = "Implements Abstract Test 16 (/conf/aitrainingdata/eotrainingdata)")
     public void verifyEOTrainingData() {
-        throw new SkipException("Not implemented yet.");
+        if (!testSubject.isFile()) {
+            Assert.assertTrue(testSubject.isFile(), "No file selected. ");
+        }
+
+        String schemaToApply = SCHEMA_PATH + "ai_eoTrainingData.json";
+        String targetType = "AI_EOTrainingData";
+
+        StringBuffer sb = new StringBuffer();
+
+        try {
+            BaseJsonSchemaValidatorTest tester = new BaseJsonSchemaValidatorTest();
+
+            JsonSchema schema = tester.getSchema(schemaToApply);
+            JsonNode rootNode = tester.getNodeFromFile(testSubject);
+            List<JsonNode> targetNode = JsonUtils.findNodesByType(rootNode, targetType);
+
+            try {
+                for (JsonNode node : targetNode) {
+                    schema.validate(node);
+                }
+            } catch (Exception e) {
+                sb.append(e.getMessage());
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            sb.append(e.getMessage());
+            e.printStackTrace();
+        }
+
+        Assert.assertTrue(sb.toString().length() == 0, sb.toString());
     }
 }
