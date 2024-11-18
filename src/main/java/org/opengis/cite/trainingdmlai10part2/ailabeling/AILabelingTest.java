@@ -123,7 +123,36 @@ public class AILabelingTest extends CommonFixture {
 
     @Test(description = "Implements Abstract Test 26 (/conf/ailabeling/labelingprocedure)")
     public void verifyLabelingProcedure() {
-        throw new NotImplemented();
+        if (!testSubject.isFile()) {
+            Assert.assertTrue(testSubject.isFile(), "No file selected. ");
+        }
+
+        String schemaToApply = SCHEMA_PATH + "ai_labelingProcedure.json";
+        String targetType = "AI_LabelingProcedure";
+
+        StringBuffer sb = new StringBuffer();
+
+        try {
+            BaseJsonSchemaValidatorTest tester = new BaseJsonSchemaValidatorTest();
+
+            JsonSchema schema = tester.getSchema(schemaToApply);
+            JsonNode rootNode = tester.getNodeFromFile(testSubject);
+            List<JsonNode> targetNode = JsonUtils.findNodesByType(rootNode, targetType);
+
+            try {
+                for (JsonNode node : targetNode) {
+                    schema.validate(node);
+                }
+            } catch (Exception e) {
+                sb.append(e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            sb.append(e.getMessage());
+            e.printStackTrace();
+        }
+
+        Assert.assertTrue(sb.toString().length() == 0, sb.toString());
     }
 
     @Test(description = "Implements Abstract Test 27 (/conf/ailabeling/labelingmethodcode)")
