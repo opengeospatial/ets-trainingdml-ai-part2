@@ -2,6 +2,7 @@ package org.opengis.cite.trainingdmlai10part2.aidataquality;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.networknt.schema.JsonSchema;
+import com.networknt.schema.ValidationMessage;
 import org.apache.jena.atlas.lib.NotImplemented;
 import org.opengis.cite.trainingdmlai10part2.BaseJsonSchemaValidatorTest;
 import org.opengis.cite.trainingdmlai10part2.CommonFixture;
@@ -13,7 +14,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class AIDataQuality extends CommonFixture {
     private File testSubject;
@@ -62,7 +65,11 @@ public class AIDataQuality extends CommonFixture {
 
             try {
                 for (JsonNode node : targetNode) {
-                    schema.validate(node);
+                    Set<ValidationMessage> errors = schema.validate(node);
+                    Iterator it = errors.iterator();
+                    while (it.hasNext()) {
+                        sb.append("Item " + node + " has error " + it.next() + ".\n");
+                    }
                 }
             } catch (Exception e) {
                 sb.append(e.getMessage());
