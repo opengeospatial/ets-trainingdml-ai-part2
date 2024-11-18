@@ -157,6 +157,41 @@ public class AILabelingTest extends CommonFixture {
 
     @Test(description = "Implements Abstract Test 27 (/conf/ailabeling/labelingmethodcode)")
     public void verifyLabelingMethodCode() {
-        throw new NotImplemented();
+        if (!testSubject.isFile()) {
+            Assert.assertTrue(testSubject.isFile(), "No file selected. ");
+        }
+
+        String schemaToApply = SCHEMA_PATH + "ai_labelingMethodCode.json";
+        StringBuffer sb = new StringBuffer();
+
+        try {
+            BaseJsonSchemaValidatorTest tester = new BaseJsonSchemaValidatorTest();
+
+            JsonSchema schema = tester.getSchema(schemaToApply);
+            JsonNode rootNode = tester.getNodeFromFile(testSubject);
+
+            String[] arrayToFetch = {"methods"};
+
+            List<JsonNode> nodes = JsonUtils.findNodesByNames(rootNode, arrayToFetch);
+            for (JsonNode targetNode : nodes) {
+                if (!targetNode.isArray()) {
+                    sb.append("Item " + targetNode + " is not an array.\n");
+                    continue;
+                }
+
+                for (int i = 0; i < targetNode.size(); i++) {
+                    JsonNode currentNode = targetNode.get(i);
+                    Set<ValidationMessage> errors = schema.validate(currentNode);
+                    Iterator it = errors.iterator();
+                    while (it.hasNext()) {
+                        sb.append("Item " + i + " has error " + it.next() + ".\n");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            sb.append(e.getMessage());
+            e.printStackTrace();
+        }
+        Assert.assertTrue(sb.toString().length() == 0, sb.toString());
     }
 }
