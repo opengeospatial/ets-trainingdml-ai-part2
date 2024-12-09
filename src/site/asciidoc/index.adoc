@@ -2,14 +2,9 @@
 
 == Scope
 
-This executable test suite (ETS) verifies the conformance of the implementation
-under test (IUT) with respect to https://docs.ogc.org/is/24-006r1/24-006r1.html[OGC Training Data Markup Language for Artificial Intelligence (TrainingDML-AI) Part 2: JSON Encoding Standard, version 1.0.0] . Conformance testing is a kind of "black box" testing that examines the
-externally visible characteristics or behaviors of the IUT while disregarding
-any implementation details.
+This executable test suite (ETS) verifies the conformance of the implementation under test (IUT) with respect to https://docs.ogc.org/is/24-006r1/24-006r1.html[OGC Training Data Markup Language for Artificial Intelligence (TrainingDML-AI) Part 2: JSON Encoding Standard, version 1.0.0] . Conformance testing is a kind of "black box" testing that examines the externally visible characteristics or behaviors of the IUT while disregarding any implementation details.
 
-
-Several conformance classes are defined in the Standard; the ones
-listed below are covered by this test suite:
+Several conformance classes are defined in the Standard; the ones listed below are covered by this test suite:
 
 * AI_TrainingDataset
 * AI_TrainingData
@@ -21,17 +16,15 @@ listed below are covered by this test suite:
 
 == Test requirements
 
-The documents listed below stipulate requirements that must be satisfied by a 
-conforming implementation.
+The documents listed below stipulate requirements that must be satisfied by a conforming implementation.
 
 1. https://docs.ogc.org/is/24-006r1/24-006r1.html[OGC Training Data Markup Language for Artificial Intelligence (TrainingDML-AI) Part 2: JSON Encoding Standard, version 1.0.0]
 
-
 == Test suite structure
 
-The test suite definition file (testng.xml) is located in the root package, 
-`org.opengis.cite.trainingdmlai10part2`. A conformance class corresponds to a &lt;test&gt; element, each
-of which includes a set of test classes that contain the actual test methods. 
+The test suite definition file (testng.xml) is located in the root package,
+`org.opengis.cite.trainingdmlai10part2`.
+A conformance class corresponds to a &lt;test&gt; element, each of which includes a set of test classes that contain the actual test methods.
 The general structure of the test suite is shown in Table 1.
 
 .Test suite structure
@@ -40,22 +33,49 @@ The general structure of the test suite is shown in Table 1.
 |Conformance class
 |Test classes
 
-|Conformance Level 1
-|org.opengis.cite.trainingdmlai10part2.level1.*
+|Json Base Type Validation
+|org.opengis.cite.trainingdmlai10part2.base.JsonBaseTypeTest
 
-|Conformance Level 2
-|org.opengis.cite.trainingdmlai10part2.level2.*
+|Iso MetaData Type Validation
+|org.opengis.cite.trainingdmlai10part2.base.IsoMetaDataTypeTest
+
+|Iso Quality Type Validation
+|org.opengis.cite.trainingdmlai10part2.base.IsoQualityTypeTest
+
+|Geospatial Type Validation
+|org.opengis.cite.trainingdmlai10part2.base.GeospatialTypeTest
+
+|AI Training Dataset Validation
+|org.opengis.cite.trainingdmlai10part2.aitrainingdataset.AITrainingDatasetTest
+
+|AI Training Data Validation
+|org.opengis.cite.trainingdmlai10part2.aitrainingdata.AITrainingDataTest
+
+|AI Task Validation
+|org.opengis.cite.trainingdmlai10part2.aitask.AITaskTest
+
+|AI Label Validation
+|org.opengis.cite.trainingdmlai10part2.ailabel.AILabelTest
+
+|AI Labeling Validation
+|org.opengis.cite.trainingdmlai10part2.ailabeling.AILabelingTest
+
+|AI Data Quality Validation
+|org.opengis.cite.trainingdmlai10part2.aidataquality.AIDataQuality
+
+|AI TD Changeset Class Validation
+|org.opengis.cite.trainingdmlai10part2.aitdchangeset.AITdChangeSet
 
 |===
 
-The Javadoc documentation provides more detailed information about the test 
-methods that constitute the suite.
+The Javadoc documentation provides more detailed information about the test methods that constitute the suite.
 
 include::how-to-run-the-tests.adoc[]
 
 == Using the REST API
 
-Using the REST API of the TEAM Engine requires some run arguments. These ate summarized in Table 2.
+Using the REST API of the TEAM Engine requires some run arguments.
+These ate summarized in Table 2.
 The _Obligation_ descriptor can have the following values: M (mandatory), O (optional), or C (conditional).
 
 .Test run arguments
