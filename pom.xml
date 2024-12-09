@@ -46,11 +46,11 @@
         </developer>
     </developers>
 
-    <properties>
-        <ets-code>trainingdmlai10-part2</ets-code>
-        <spec-version>1.0</spec-version>
-        <docker.teamengine.version>5.5.2</docker.teamengine.version>
-    </properties>
+  <properties>
+    <ets-code>trainingdmlai10-part2</ets-code>
+    <spec-version>1.0</spec-version>
+    <docker.teamengine.version>5.7</docker.teamengine.version>
+  </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -88,34 +88,40 @@
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.networknt</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>1.0.76</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opengis.cite.teamengine</groupId>
-            <artifactId>teamengine-spi</artifactId>
-            <version>5.5.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opengis.cite</groupId>
-            <artifactId>schema-utils</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>com.networknt</groupId>
+      <artifactId>json-schema-validator</artifactId>
+      <version>1.0.76</version>
+    </dependency>  
+    <dependency>
+      <groupId>org.opengis.cite.teamengine</groupId>
+      <artifactId>teamengine-spi</artifactId>
+      <version>5.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opengis.cite</groupId>
+      <artifactId>schema-utils</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>xercesImpl</artifactId>
+          <groupId>xerces</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+    </dependency>
+  </dependencies>
 
     <build>
         <plugins>
