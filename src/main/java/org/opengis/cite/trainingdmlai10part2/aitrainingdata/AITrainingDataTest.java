@@ -45,13 +45,13 @@ public class AITrainingDataTest extends CommonFixture {
         this.testSubject = testSubject;
     }
 
-    @Test(description = "Implements Abstract Test 14 (/conf/aitrainingdata/trainingtypecode)")
+    @Test(description = "Implements Abstract Test 14 (/conf/aitrainingdata/trainingdata)")
     public void verifyTrainingData() {
         if (!testSubject.isFile()) {
             Assert.assertTrue(testSubject.isFile(), "No file selected. ");
         }
 
-        String schemaToApply = SCHEMA_PATH + "ai_trainingData.json.json";
+        String schemaToApply = SCHEMA_PATH + "ai_trainingData.json";
         String targetType = "AI_AbstractTrainingData";
 
         StringBuffer sb = new StringBuffer();
