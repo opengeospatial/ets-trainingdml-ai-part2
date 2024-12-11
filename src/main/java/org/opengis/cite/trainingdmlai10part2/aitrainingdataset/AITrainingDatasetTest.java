@@ -62,7 +62,11 @@ public class AITrainingDatasetTest extends CommonFixture {
             JsonNode rootNode = tester.getNodeFromFile(testSubject);
 
             if (rootNode.has("type") && rootNode.get("type").asText().equals(targetType)) {
-                schema.validate(rootNode);
+                Set<ValidationMessage> errors = schema.validate(rootNode);
+                Iterator it = errors.iterator();
+                while (it.hasNext()) {
+                    sb.append("Item " + rootNode + " has error " + it.next() + ".\n");
+                }
             } else {
                 sb.append("Item " + rootNode + " is not an AI_AbstractTrainingDataset.\n");
             }
@@ -130,7 +134,11 @@ public class AITrainingDatasetTest extends CommonFixture {
             JsonNode rootNode = tester.getNodeFromFile(testSubject);
 
             if (rootNode.has("type") && rootNode.get("type").asText().equals(targetType)) {
-                schema.validate(rootNode);
+                Set<ValidationMessage> errors = schema.validate(rootNode);
+                Iterator it = errors.iterator();
+                while (it.hasNext()) {
+                    sb.append("Item " + rootNode + " has error " + it.next() + ".\n");
+                }
             } else {
                 sb.append("Item " + rootNode + " is not an " + targetType + ".\n");
             }
